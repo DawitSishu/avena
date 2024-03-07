@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Grid } from "@mui/material";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 //username, firstname, lastname, phone, password
 
@@ -10,6 +11,8 @@ import { Link } from "react-router-dom";
   ..vakues
 },
 phone */
+
+const BASE_URL = "https://hackathon-54ac.onrender.com";
 
 const index = () => {
   useEffect(() => {
@@ -45,7 +48,7 @@ const index = () => {
     setValues({ ...values, [prop]: event.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true);
     if (
       !values.username ||
@@ -82,9 +85,12 @@ const index = () => {
         user: { ...values },
         phone,
       };
+      const res = await axios.post(`${BASE_URL}/user/register`, payload);
+      console.log(res);
       setLoading(false);
     } catch (error) {
       toastr.error("Error: Failed to Create Account Try Again!!");
+      console.log(error);
       setLoading(false);
       return;
     }

@@ -5,6 +5,8 @@ import Loader from "./Components/Loader";
 
 const SignUp = React.lazy(() => import("./Components/Signup"));
 const LogIn = React.lazy(() => import("./Components/Login"));
+const Home = React.lazy(() => import("./Components/Home"));
+const COOP = React.lazy(() => import("./Components/COOP"));
 
 const lightTheme = createTheme({
   palette: {
@@ -40,6 +42,8 @@ const lightTheme = createTheme({
   },
 });
 
+// https://hackathon-54ac.onrender.com
+
 function App() {
   return (
     <ThemeProvider theme={lightTheme}>
@@ -57,10 +61,28 @@ function App() {
           />
           <Route
             exact
+            path="/home"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
             path="/login"
             element={
               <Suspense fallback={<Loader />}>
                 <LogIn />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/coop"
+            element={
+              <Suspense fallback={<Loader />}>
+                <COOP />
               </Suspense>
             }
           />
