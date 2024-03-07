@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Grid } from "@mui/material";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
+import { Link } from "react-router-dom";
 
 //username, firstname, lastname, phone, password
 
@@ -133,6 +134,7 @@ const index = () => {
               style={{ margin: "8px", width: "300px" }}
               label="Phone Number"
               value={phone}
+              type="number"
               onChange={(e) => setPhone(e.target.value)}
             />
           </Grid>
@@ -199,6 +201,16 @@ const index = () => {
         >
           Sign Up
         </Button>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <Button
+            style={{ margin: "16px" }}
+            variant="contained"
+            color="primary"
+            fullwidth
+          >
+            Log In
+          </Button>
+        </Link>
       </Grid>
     </div>
   );

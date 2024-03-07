@@ -6,7 +6,7 @@ export const MyProvider = ({ children }) => {
   const [lan, handleLan] = useState({
     loggedIn: false,
     token: "",
-    eng: true,
+    user: true,
   });
 
   return (

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Loader from "./Components/Loader";
 
 const SignUp = React.lazy(() => import("./Components/Signup"));
+const LogIn = React.lazy(() => import("./Components/Login"));
 
 const lightTheme = createTheme({
   palette: {
@@ -51,6 +52,15 @@ function App() {
             element={
               <Suspense fallback={<Loader />}>
                 <SignUp />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/login"
+            element={
+              <Suspense fallback={<Loader />}>
+                <LogIn />
               </Suspense>
             }
           />
