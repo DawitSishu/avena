@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { Suspense, useState } from "react";
+import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Loader from "./Components/Loader";
+
+const SignUp = React.lazy(() => import("./Components/Signup"));
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+    primary: {
+      main: "#0000ff",
+    },
+    secondary: {
+      main: "#800080",
+    },
+    background: {},
+  },
+  typography: {
+    fontFamily: "Playfair Display",
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 768,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background: "linear-gradient(150deg,#ffffff 50%, #add5ff 80%)",
+        },
+      },
+    },
+  },
+});
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider theme={lightTheme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Suspense fallback={<Loader />}>
+                <SignUp />
+              </Suspense>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
