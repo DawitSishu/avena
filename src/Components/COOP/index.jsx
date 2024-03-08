@@ -3,9 +3,11 @@ import { Grid, Typography } from "@mui/material";
 import { Select, MenuItem, Container, Button } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ChatIcon from "@mui/icons-material/Chat";
+import { useNavigate } from "react-router-dom";
 
 const index = () => {
   const [language, setlan] = useState(0);
+  const navigate = useNavigate();
   return (
     <div>
       <Container>
@@ -73,7 +75,12 @@ const index = () => {
       </Container>
       <Grid container justifyContent="center">
         <Grid item>
-          <Button variant="contained" color="primary" startIcon={<PhoneIcon />}>
+          <Button
+            onClick={() => navigate("/call/support")}
+            variant="contained"
+            color="primary"
+            startIcon={<PhoneIcon />}
+          >
             {language == 0 ? "Call" : language == 1 ? "ይደውሉ" : "Waamuu"}
           </Button>
         </Grid>
@@ -85,8 +92,43 @@ const index = () => {
             sx={{
               ml: 6,
             }}
+            onClick={() => navigate("/chat")}
           >
             {language == 0 ? "Chat" : language == 1 ? "መልእክት" : "Ergaa"}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={<PhoneIcon />}
+            sx={{
+              ml: 6,
+            }}
+            onClick={() => navigate("/call/finance")}
+          >
+            {language == 0
+              ? "FInancial Advice"
+              : language == 1
+              ? "የገንዘብ ምክር"
+              : "FIGorsa Faayinaansii"}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<ChatIcon />}
+            sx={{
+              ml: 6,
+            }}
+            onClick={() => navigate("/chat")}
+          >
+            {language == 0
+              ? "FInancial Advice"
+              : language == 1
+              ? "የገንዘብ ምክር"
+              : "FIGorsa Faayinaansii"}
           </Button>
         </Grid>
       </Grid>

@@ -7,6 +7,9 @@ const SignUp = React.lazy(() => import("./Components/Signup"));
 const LogIn = React.lazy(() => import("./Components/Login"));
 const Home = React.lazy(() => import("./Components/Home"));
 const COOP = React.lazy(() => import("./Components/COOP"));
+const Dashboard = React.lazy(() => import("./Components/Dashboard"));
+const Chat = React.lazy(() => import("./Components/Chat"));
+const Call = React.lazy(() => import("./Components/Call"));
 
 const lightTheme = createTheme({
   palette: {
@@ -83,6 +86,33 @@ function App() {
             element={
               <Suspense fallback={<Loader />}>
                 <COOP />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/dash"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Dashboard />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/chat"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Chat />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
+            path="/call/:val"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Call />
               </Suspense>
             }
           />

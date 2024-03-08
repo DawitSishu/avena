@@ -3,7 +3,9 @@ import { TextField, Button, Typography, Grid } from "@mui/material";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 //username, firstname, lastname, phone, password
 
@@ -41,6 +43,8 @@ const index = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const [phone, setPhone] = useState("");
 
@@ -85,9 +89,24 @@ const index = () => {
         user: { ...values },
         phone,
       };
-      const res = await axios.post(`${BASE_URL}/user/register`, payload);
-      console.log(res);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+        toastr.success("Succesfully created Account!!");
+        navigate("/home");
+      }, 5000);
+      // const res = await axios.post(`${BASE_URL}/user/register`, payload);
+      setConfirm({
+        confirmEmail: "",
+        confirmPassword: "",
+      });
+      setValues({
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+      });
+      setPhone("");
     } catch (error) {
       toastr.error("Error: Failed to Create Account Try Again!!");
       console.log(error);
@@ -97,7 +116,9 @@ const index = () => {
 
     console.log("Form submitted:", values);
   };
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div style={{ padding: "2px" }}>
       <Grid>
         <Grid container justifyContent="center">

@@ -16,7 +16,8 @@ import axios from "axios";
 import toastr from "toastr";
 import "toastr/build/toastr.min.css";
 import Loader from "../Loader";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const styles = {
   paper: {
@@ -44,16 +45,19 @@ function Login({ login }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     try {
       //   const result = await axios.post(BASE_URI, { email, password });
-      let token = result.data.token;
-      localStorage.setItem("token", token);
+      // let token = result.data.token;
+      // localStorage.setItem("token", token);
       toastr.success("Successfully Logged In!!");
-      login();
+      // login();
+      navigate("/dash");
+      return;
     } catch (error) {
       toastr.error("ERROR: Incorrect Login Credentials");
     } finally {
